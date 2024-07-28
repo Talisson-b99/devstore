@@ -13,19 +13,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm' # Configurar o cache do npm
+          cache: 'npm'
 
       - name: Instalar dependências
         run: npm install
-        working-directory: subdir # Certifique-se de que npm install está sendo executado no diretório correto
 
       - name: Build do projeto
         run: npm run build
-        working-directory: subdir # Certifique-se de que o comando build está sendo executado no diretório correto
 
       - name: Iniciar projeto
         run: npm start
-        working-directory: subdir # Certifique-se de que o comando start está sendo executado no diretório correto
 
       - name: Executar Cypress
         uses: cypress-io/github-action@v6
