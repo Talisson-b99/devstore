@@ -20,14 +20,20 @@ jobs:
 
       - name: Build do projeto
         run: npm run build
+        env:
+          NEXT_PUBLIC_API_BASE_URL: 'https://api-devstore-silk.vercel.app'
+          APP_URL: 'http://localhost:3000'
 
       - name: Iniciar projeto
         run: npm start
+        env:
+          NEXT_PUBLIC_API_BASE_URL: 'https://api-devstore-silk.vercel.app'
+          APP_URL: 'http://localhost:3000'
 
       - name: Executar Cypress
         uses: cypress-io/github-action@v6
         env:
+          NEXT_PUBLIC_API_BASE_URL: 'https://api-devstore-silk.vercel.app'
           APP_URL: 'http://localhost:3000'
-          NEXT_PUBLIC_BASE_URL: 'https://api-devstore-silk.vercel.app'
         with:
           start: npm start
