@@ -9,26 +9,34 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - name: Setup Node.js cache
+      - name: Configurar cache do Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-          cache-dependency-path: subdir/package-lock.json
+          cache-dependency-path: 'subdir/package-lock.json' # Certifique-se de que o caminho está correto e relativo à raiz do repositório
 
-      - name: Install dependencies
+      - name: Instalar dependências
         run: npm install
+        working-directory: subdir # Certifique-se de que o npm install está sendo executado no diretório correto
 
-      - name: 'Cypress run'
+      - name: Build do projeto
+        run: npm run build
+        working-directory: subdir # Certifique-se de que o comando build está sendo executado no diretório correto
+
+      - name: Iniciar projeto
+        run: npm start
+        working-directory: subdir # Certifique-se de que o comando start está sendo executado no diretório correto
+
+      - name: 'Executar Cypress'
         uses: cypress-io/github-action@v6
         env:
           APP_URL: 'http://localhost:3000'
           NEXT_PUBLIC_BASE_URL: 'https://api-devstore-silk.vercel.app'
         with:
-          build: npm run build
           start: npm start
