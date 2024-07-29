@@ -25,7 +25,7 @@ jobs:
           APP_URL: 'http://localhost:3000'
 
       - name: Iniciar projeto
-        run: npm start
+        run: npm run start
         env:
           NEXT_PUBLIC_API_BASE_URL: 'https://api-devstore-silk.vercel.app'
           APP_URL: 'http://localhost:3000'
